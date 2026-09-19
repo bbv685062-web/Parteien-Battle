@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+<title>Jetzt abstimmen – Parteien Battle</title>
+<link rel="stylesheet" href="/shared.css" />
+<link rel="stylesheet" href="/vote.css" />
+</head>
+<body>
+
+<header class="vheader">
+  <h1 id="vTitle">Jetzt abstimmen!</h1>
+  <p>Wähle deine Partei – <b>komplett anonym</b>, keine Anmeldung nötig.</p>
+</header>
+
+<main id="voteList" class="vote-list"></main>
+
+<div id="toast" class="toast hidden"></div>
+
+<footer class="vfooter">
+  <p>Jede Stimme = 1 Punkt live im Stream ✨</p>
+</footer>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="/lib/effects.js"></script>
+<script src="/vote.js"></script>
+</body>
+</html>

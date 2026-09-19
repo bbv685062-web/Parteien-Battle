@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+<title>Parteien Battle – Kontrolle</title>
+<link rel="stylesheet" href="/shared.css" />
+<link rel="stylesheet" href="/control.css" />
+</head>
+<body>
+
+<header class="header">
+  <div class="header-titles">
+    <h1 id="title">PARTEIEN BATTLE STREAM</h1>
+    <p id="subtitle">1 Stimme = 1 Punkt für eure Partei</p>
+  </div>
+  <div class="header-actions">
+    <button class="icon-btn" id="btnShare" title="Voting-Link teilen">🔗</button>
+    <button class="icon-btn" id="btnSettings" title="Einstellungen">⚙️</button>
+    <button class="btn-end" id="btnEnd">Battle beenden</button>
+  </div>
+</header>
+
+<main id="partyList" class="party-list"></main>
+
+<!-- Punkte-Menü Popup -->
+<div class="overlay hidden" id="pointsOverlay">
+  <div class="points-menu" id="pointsMenu">
+    <div class="points-menu-header">
+      <span class="pm-emoji" id="pmEmoji"></span>
+      <span class="pm-name" id="pmName"></span>
+      <button class="pm-close" id="pmClose">✕</button>
+    </div>
+    <div class="points-menu-body">
+      <div class="quick-points">
+        <button class="qp-btn" data-amount="1">+1</button>
+        <button class="qp-btn" data-amount="5">+5</button>
+        <button class="qp-btn" data-amount="10">+10</button>
+      </div>
+      <div class="custom-points">
+        <input type="number" id="customAmount" min="1" max="100000" placeholder="Andere Zahl" />
+        <button id="btnCustomAdd">Hinzufügen</button>
+      </div>
+      <button class="pm-edit-btn" id="pmEdit">✏️ Partei bearbeiten</button>
+    </div>
+  </div>
+</div>
+
+<!-- Sieger Overlay -->
+<div class="overlay hidden" id="winnerOverlay">
+  <div class="winner-box">
+    <div class="crown">👑</div>
+    <div class="sieger-label">SIEGER</div>
+    <div class="winner-name" id="winnerName"></div>
+    <div class="winner-points" id="winnerPoints"></div>
+    <div class="stats-box" id="statsBox"></div>
+    <div class="qr-wrap" id="qrWrap"></div>
+    <div class="winner-actions">
+      <button id="btnNewBattle">🔄 Neues Battle starten</button>
+      <button id="btnCloseWinner">Schließen</button>
+    </div>
+  </div>
+</div>
+
+<!-- Einstellungen Overlay -->
+<div class="overlay hidden" id="settingsOverlay">
+  <div class="settings-box">
+    <div class="settings-header">
+      <h2>Einstellungen</h2>
+      <button class="pm-close" id="settingsClose">✕</button>
+    </div>
+    <div class="settings-section">
+      <label>Titel</label>
+      <input type="text" id="metaTitle" maxlength="80" />
+      <label>Untertitel</label>
+      <input type="text" id="metaSubtitle" maxlength="140" />
+      <label>Abstimmungs-Sperre pro Partei (Sekunden)</label>
+      <input type="number" id="metaCooldown" min="0" max="600" />
+      <button id="btnSaveMeta">Speichern</button>
+    </div>
+    <div class="settings-section">
+      <h3>Parteien</h3>
+      <div id="partyEditList" class="party-edit-list"></div>
+      <button id="btnAddParty">➕ Neue Partei</button>
+    </div>
+  </div>
+</div>
+
+<!-- Partei bearbeiten Overlay -->
+<div class="overlay hidden" id="editPartyOverlay">
+  <div class="settings-box small">
+    <div class="settings-header">
+      <h2>Partei bearbeiten</h2>
+      <button class="pm-close" id="editPartyClose">✕</button>
+    </div>
+    <div class="settings-section">
+      <label>Name</label>
+      <input type="text" id="epName" maxlength="40" />
+      <label>Emoji / Logo</label>
+      <input type="text" id="epEmoji" maxlength="8" />
+      <label>Farbe</label>
+      <input type="color" id="epColor" />
+      <label>Website (optional, z.B. Infoseite)</label>
+      <input type="text" id="epUrl" maxlength="300" placeholder="https://..." />
+      <div class="edit-actions">
+        <button id="btnSaveParty">Speichern</button>
+        <button id="btnDeleteParty" class="btn-danger">🗑️ Löschen</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Voting-Link teilen Overlay -->
+<div class="overlay hidden" id="shareOverlay">
+  <div class="settings-box small">
+    <div class="settings-header">
+      <h2>Voting-Link für Zuschauer</h2>
+      <button class="pm-close" id="shareClose">✕</button>
+    </div>
+    <div class="settings-section" style="text-align:center;">
+      <div id="shareQr" class="qr-wrap"></div>
+      <p id="shareUrl" class="share-url"></p>
+      <p class="share-hint">Teile diesen Link oder QR-Code mit deinen Zuschauer:innen – anonymes Abstimmen, keine Anmeldung nötig.</p>
+      <button id="btnCopyLink">Link kopieren</button>
+    </div>
+  </div>
+</div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="/lib/effects.js"></script>
+<script src="/control.js"></script>
+</body>
+</html>
