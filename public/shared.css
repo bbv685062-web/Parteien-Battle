@@ -1,0 +1,103 @@
+:root {
+  --bg: #0b0d17;
+  --bg-elevated: #151827;
+  --text: #f5f6fa;
+  --text-dim: #9ca3af;
+  --accent: #fbbf24;
+  --danger: #ef4444;
+  --radius: 16px;
+  --shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Segoe UI', system-ui, -apple-system, Roboto, Arial, sans-serif;
+  -webkit-tap-highlight-color: transparent;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.fx-layer {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  overflow: hidden;
+}
+
+.fx-particle {
+  position: absolute;
+  border-radius: 3px;
+  transform: translate(-50%, -50%);
+  animation-name: fx-burst;
+  animation-timing-function: cubic-bezier(0.2, 0.7, 0.3, 1);
+  animation-fill-mode: forwards;
+  will-change: transform, opacity;
+}
+
+@keyframes fx-burst {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) rotate(var(--rot));
+    opacity: 0;
+  }
+}
+
+.fx-confetti-fall {
+  position: absolute;
+  top: -20px;
+  animation-name: fx-fall;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+  will-change: transform, opacity;
+}
+
+@keyframes fx-fall {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(110vh) rotate(var(--rot));
+    opacity: 0.9;
+  }
+}
+
+.fx-float-points {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  font-size: 1.6rem;
+  font-weight: 800;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.6);
+  animation: fx-float 1.3s ease-out forwards;
+  white-space: nowrap;
+}
+
+@keyframes fx-float {
+  0% { transform: translate(-50%, -50%) scale(0.6); opacity: 0; }
+  15% { transform: translate(-50%, -110%) scale(1.15); opacity: 1; }
+  100% { transform: translate(-50%, -260%) scale(1); opacity: 0; }
+}
+
+.fx-flash {
+  position: fixed;
+  inset: 0;
+  opacity: 0.35;
+  animation: fx-flash-fade 0.5s ease-out forwards;
+}
+
+@keyframes fx-flash-fade {
+  0% { opacity: 0.35; }
+  100% { opacity: 0; }
+}
